@@ -1,9 +1,17 @@
-# app/models/article.py
-
 from pydantic import BaseModel
+from datetime import date
+from typing import List, Dict, Optional
 
 class Article(BaseModel):
-    id: int
+    id: Optional[str] = None
+    
+    #Mandatory
     title: str
-    url: str
-    summary: str
+    description: str
+    tags: List[str] 
+    url: str 
+
+    posted_at: Optional[date] = None  
+    metadata: Optional[Dict[str, str]] = None  
+
+

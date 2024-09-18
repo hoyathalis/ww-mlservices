@@ -1,9 +1,8 @@
-# app/api/api_v1/endpoints/recommendations.py
-
-from fastapi import APIRouter, HTTPException
+from fastapi import APIRouter, HTTPException , status
 from typing import List
 from app.models.article import Article
 from app.services.recommendation_service import get_recommendations
+from app.services.embedding_service import store_article_in_pinecone
 
 router = APIRouter()
 
@@ -16,3 +15,13 @@ async def read_recommendations(user_id: int):
     if not recommendations:
         raise HTTPException(status_code=404, detail="Recommendations not found")
     return recommendations
+
+@router.post("/", status_code=status.HTTP_204_NO_CONTENT)
+async def post_article(article: Article):
+    """
+    Create embeddings of the article and store it in Pinecone along with metadata.
+    """
+    try:
+        store_article_in_pinecone(article)
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))

@@ -4,8 +4,8 @@ from fastapi import FastAPI
 from app.api.api_v1.api import api_router
 
 app = FastAPI(
-    title="Article Recommendation Service",
-    description="API for serving article recommendations",
+    title="WalletWize Machine Learning Serivces",
+    description="Serves all Machine Learning API's for Wallet Wize",
     version="1.0.0",
 )
 
