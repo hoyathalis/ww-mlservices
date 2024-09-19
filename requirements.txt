@@ -3,3 +3,4 @@ uvicorn[standard]
 pinecone-client
 sentence-transformers
 python-dotenv
+pinecone-client[grpc]
